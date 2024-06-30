@@ -16,10 +16,10 @@ export default class extends BaseSchema {
         .onDelete('CASCADE')
         .onUpdate('CASCADE')
       table.integer('product_id').notNullable().unsigned().references('id').inTable('products')
-      table.integer('quantity').notNullable()
-      table.decimal('price', 10, 2).notNullable()
-      table.decimal('total_price', 10, 2).notNullable()
-      table.date('date').nullable().defaultTo(this.now())
+      table.integer('quantity').notNullable().unsigned()
+      table.decimal('price', 10, 2).notNullable().unsigned()
+      table.decimal('total_price', 10, 2).notNullable().unsigned()
+      table.dateTime('date').nullable().defaultTo(this.now())
     })
   }
 

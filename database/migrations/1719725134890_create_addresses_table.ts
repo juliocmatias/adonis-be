@@ -14,7 +14,7 @@ export default class extends BaseSchema {
       table.string('country', 60).notNullable()
       table.string('zip', 15).notNullable()
       table
-        .integer('client_id', 10)
+        .integer('client_id')
         .unsigned()
         .references('id')
         .inTable('clients')

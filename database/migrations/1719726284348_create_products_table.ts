@@ -8,8 +8,8 @@ export default class extends BaseSchema {
       table.increments('id').notNullable().primary()
 
       table.string('name', 30).notNullable()
-      table.integer('quantity').notNullable()
-      table.decimal('price', 10, 2).notNullable()
+      table.integer('quantity').notNullable().unsigned()
+      table.decimal('price', 10, 2).notNullable().unsigned()
       table.boolean('deleted').notNullable().defaultTo(false)
     })
   }

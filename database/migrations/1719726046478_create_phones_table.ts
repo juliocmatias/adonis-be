@@ -9,7 +9,7 @@ export default class extends BaseSchema {
 
       table.string('number', 20).notNullable()
       table
-        .string('client_id', 10)
+        .integer('client_id')
         .notNullable()
         .unsigned()
         .references('id')
