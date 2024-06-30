@@ -8,6 +8,8 @@ services:
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
     env_file:
       - .env
+    volumes:
+      - ./dockerConfig/mysql-dev-init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
       - ${DB_PORT}:3306
     healthcheck:
