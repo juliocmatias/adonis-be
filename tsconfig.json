@@ -20,6 +20,8 @@
     "#database/*": ["database/*"],
     "#start/*": ["start/*"],
     "#tests/*": ["tests/*"],
-    "#config/*": ["config/*"]
+    "#config/*": ["config/*"],
+    "#interfaces/*": ["app/interfaces/*"],
+    "#routes/*": ["routes/*"],
   }
 }
