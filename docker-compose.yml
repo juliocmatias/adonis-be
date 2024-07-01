@@ -35,6 +35,8 @@ services:
       - 9229:9229
     env_file:
       - .env
+    environment:
+      - DB_HOST=mysql
     volumes:
       - ./:/home/node/app
     command: dumb-init node ace serve --watch
