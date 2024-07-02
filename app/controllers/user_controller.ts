@@ -10,4 +10,12 @@ export default class UsersController {
     const { status, data } = await this.userService.store(email, password)
     return response.status(mapStatusHTTP(status)).json(data)
   }
+
+  async update({ request, response, params }: HttpContext) {
+    const { id } = params
+
+    const { email, password } = request.all()
+    const { status, data } = await this.userService.update(id, email, password)
+    return response.status(mapStatusHTTP(status)).json(data)
+  }
 }

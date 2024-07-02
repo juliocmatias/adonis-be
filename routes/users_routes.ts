@@ -5,6 +5,7 @@ import { middleware } from '#start/kernel'
 router
   .resource('user', UsersController)
   .apiOnly()
-  .only(['store'])
+  .only(['store', 'update'])
   .where('id', router.matchers.number())
-  .use(['store'], middleware.userValidation())
+  .use(['store', 'update'], middleware.userValidation())
+  .use(['update'], middleware.tokenValidation())
