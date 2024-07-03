@@ -16,7 +16,13 @@ export default class ClientService {
 
   async show(clientId: number): Promise<ServiceResponse<Client>> {
     try {
-      const client = await this.clientModel.query().where('id', clientId).preload('sales').first()
+      const client = await this.clientModel
+        .query()
+        .where('id', clientId)
+        .preload('sales', (query) => {
+          query.orderBy('date', 'asc')
+        })
+        .first()
 
       if (!client) {
         return this.notFound()
