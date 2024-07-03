@@ -22,5 +22,10 @@ export default class SalesController {
     return response.status(mapStatusHTTP(status)).json(data)
   }
 
-  async destroy({ params }: HttpContext) {}
+  async destroy({ params, response }: HttpContext) {
+    const { id } = params
+    const { status, data } = await this.saleService.destroy(Number.parseInt(id))
+
+    return response.status(mapStatusHTTP(status)).json(data)
+  }
 }

@@ -64,6 +64,33 @@ export default class SaleService {
     }
   }
 
+  async destroy(id: number): Promise<ServiceResponse<{ message: string }>> {
+    try {
+      const sale = await this.saleModel.find(id)
+
+      if (!sale) {
+        return { status: 'NOT_FOUND', data: { message: 'Sale not found' } }
+      }
+
+      const product = await this.productModel.find(sale.productId)
+      if (product) {
+        product.quantity += sale.quantity
+
+        if (product.deleted) {
+          product.deleted = false
+        }
+
+        await product.save()
+      }
+
+      await sale.delete()
+
+      return { status: 'SUCCESSFUL', data: { message: 'Sale deleted' } }
+    } catch (error) {
+      return this.handleError(error)
+    }
+  }
+
   private handleError(error: any): ServiceResponse<any> {
     const message = error instanceof Error ? error.message : 'Unknown error occurred'
     return { status: 'INTERNAL_SERVER_ERROR', data: { message } }
