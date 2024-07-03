@@ -10,13 +10,13 @@ export default class UserService {
   async store(email: string, password: string): Promise<ServiceResponse<UserWithoutPassword>> {
     try {
       if (!email || !password) {
-        return { status: 'BAD_REQUEST', data: { message: 'Email and password are required' } }
+        return this.badRequest('Email or password is required')
       }
 
       const user = await this.userModel.findBy('email', email)
 
       if (user) {
-        return { status: 'CONFLICT', data: { message: 'User already exists' } }
+        return this.conflict('User already exists')
       }
 
       const hashedPassword = await bcrypt.hash(password, this.SALT_ROUNDS)
@@ -29,8 +29,7 @@ export default class UserService {
 
       return { status: 'CREATED', data: userWithoutPassword }
     } catch (error) {
-      const message = error instanceof Error ? error.message : 'Unknown error occurred'
-      return { status: 'INTERNAL_SERVER_ERROR', data: { message } }
+      return this.handleError(error)
     }
   }
 
@@ -47,11 +46,11 @@ export default class UserService {
       }
 
       if (email && (await this.userModel.findBy('email', email))) {
-        return { status: 'CONFLICT', data: { message: 'User already exists' } }
+        return this.conflict('Email already exists')
       }
 
       if (!email && !password) {
-        return { status: 'BAD_REQUEST', data: { message: 'Email or password is required' } }
+        return this.badRequest('Email or password is required')
       }
 
       if (email) user.email = email
@@ -69,8 +68,20 @@ export default class UserService {
 
       return { status: 'SUCCESSFUL', data: userWithoutPassword }
     } catch (error) {
-      const message = error instanceof Error ? error.message : 'Unknown error occurred'
-      return { status: 'INTERNAL_SERVER_ERROR', data: { message } }
+      return this.handleError(error)
     }
+  }
+
+  private handleError(error: unknown): ServiceResponse<any> {
+    const message = error instanceof Error ? error.message : 'Unknown error occurred'
+    return { status: 'INTERNAL_SERVER_ERROR', data: { message } }
+  }
+
+  private badRequest(message: string): ServiceResponse<any> {
+    return { status: 'BAD_REQUEST', data: { message } }
+  }
+
+  private conflict(message: string): ServiceResponse<any> {
+    return { status: 'CONFLICT', data: { message } }
   }
 }
