@@ -17,6 +17,10 @@ export default class ClientService {
 
   async store(name: string, taxId: string): Promise<ServiceResponse<{ id: number }>> {
     try {
+      if (!name || !taxId) {
+        return { status: 'BAD_REQUEST', data: { message: 'Name and taxId are required' } }
+      }
+
       const clientExists = await this.clientModel.findBy('taxId', taxId)
 
       if (clientExists) {
@@ -44,20 +48,17 @@ export default class ClientService {
         return { status: 'NOT_FOUND', data: { message: 'Client not found' } }
       }
 
-      if (client.taxId !== taxId) {
+      if (taxId && client.taxId !== taxId) {
         const clientExists = await this.clientModel.findBy('taxId', taxId)
 
         if (clientExists) {
           return { status: 'CONFLICT', data: { message: 'Client already exists' } }
         }
+        client.taxId = taxId
       }
 
       if (name) {
         client.name = name
-      }
-
-      if (taxId) {
-        client.taxId = taxId
       }
 
       await client.save()
@@ -71,7 +72,7 @@ export default class ClientService {
 
   async destroy(id: number): Promise<ServiceResponse<{ message: 'Client deleted' }>> {
     try {
-      const client = await this.clientModel.findOrFail(id)
+      const client = await this.clientModel.findBy('id', id)
 
       if (!client) {
         return { status: 'NOT_FOUND', data: { message: 'Client not found' } }

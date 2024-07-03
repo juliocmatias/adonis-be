@@ -1,4 +1,24 @@
 import router from '@adonisjs/core/services/router'
 const ClientController = () => import('#controllers/client_controller')
+import { middleware } from '#start/kernel'
 
-router.resource('client', ClientController).apiOnly().where('id', router.matchers.number())
+router
+  .group(() => {
+    router.get('/', [ClientController, 'index']).use(middleware.tokenValidation())
+    router
+      .post('/', [ClientController, 'store'])
+      .use([middleware.userValidation(), middleware.clientValidation()])
+    router
+      .put('/:id', [ClientController, 'update'])
+      .where('id', router.matchers.number())
+      .use([middleware.tokenValidation(), middleware.clientValidation()])
+    router
+      .patch('/:id', [ClientController, 'update'])
+      .where('id', router.matchers.number())
+      .use([middleware.tokenValidation(), middleware.clientValidation()])
+    router
+      .delete('/:id', [ClientController, 'destroy'])
+      .where('id', router.matchers.number())
+      .use(middleware.tokenValidation())
+  })
+  .prefix('client')
