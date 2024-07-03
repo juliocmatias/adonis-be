@@ -19,7 +19,7 @@ export default class ClientService {
       const client = await this.clientModel.query().where('id', clientId).preload('sales').first()
 
       if (!client) {
-        return this.notFound('Client not found')
+        return this.notFound()
       }
 
       return { status: 'SUCCESSFUL', data: client }
@@ -31,13 +31,13 @@ export default class ClientService {
   async store(name: string, taxId: string): Promise<ServiceResponse<{ id: number }>> {
     try {
       if (!name || !taxId) {
-        return this.badRequest('Name and taxId are required')
+        return { status: 'BAD_REQUEST', data: { message: 'Name and taxId are required' } }
       }
 
       const clientExists = await this.clientModel.findBy('taxId', taxId)
 
       if (clientExists) {
-        return { status: 'CONFLICT', data: { message: 'Client already exists' } }
+        return this.conflict()
       }
 
       const client = await this.clientModel.create({ name, taxId })
@@ -57,14 +57,14 @@ export default class ClientService {
       const client = await this.clientModel.find(id)
 
       if (!client) {
-        return this.notFound('Client not found')
+        return this.notFound()
       }
 
       if (taxId && client.taxId !== taxId) {
         const clientExists = await this.clientModel.findBy('taxId', taxId)
 
         if (clientExists) {
-          return { status: 'CONFLICT', data: { message: 'Client already exists' } }
+          return this.conflict()
         }
         client.taxId = taxId
       }
@@ -86,7 +86,7 @@ export default class ClientService {
       const client = await this.clientModel.find(id)
 
       if (!client) {
-        return this.notFound('Client not found')
+        return this.notFound()
       }
 
       await client.delete()
@@ -102,11 +102,11 @@ export default class ClientService {
     return { status: 'INTERNAL_SERVER_ERROR', data: { message } }
   }
 
-  private notFound(message: string): ServiceResponse<any> {
-    return { status: 'NOT_FOUND', data: { message } }
+  private conflict(): ServiceResponse<any> {
+    return { status: 'CONFLICT', data: { message: 'Client already exists' } }
   }
 
-  private badRequest(message: string): ServiceResponse<any> {
-    return { status: 'BAD_REQUEST', data: { message } }
+  private notFound(): ServiceResponse<any> {
+    return { status: 'NOT_FOUND', data: { message: 'Client not found' } }
   }
 }
