@@ -25,5 +25,9 @@ export default class ClientController {
     return response.status(mapStatusHTTP(status)).json(data)
   }
 
-  // async destroy({ params }: HttpContext) {}
+  async destroy({ params, response }: HttpContext) {
+    const { id } = params
+    const { status, data } = await this.clientService.destroy(id)
+    return response.status(mapStatusHTTP(status)).json(data)
+  }
 }

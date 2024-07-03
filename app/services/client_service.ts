@@ -68,4 +68,21 @@ export default class ClientService {
       return { status: 'INTERNAL_SERVER_ERROR', data: { message } }
     }
   }
+
+  async destroy(id: number): Promise<ServiceResponse<{ message: 'Client deleted' }>> {
+    try {
+      const client = await this.clientModel.findOrFail(id)
+
+      if (!client) {
+        return { status: 'NOT_FOUND', data: { message: 'Client not found' } }
+      }
+
+      await client.delete()
+
+      return { status: 'SUCCESSFUL', data: { message: 'Client deleted' } }
+    } catch (error) {
+      const message = error instanceof Error ? error.message : 'Unknown error occurred'
+      return { status: 'INTERNAL_SERVER_ERROR', data: { message } }
+    }
+  }
 }
