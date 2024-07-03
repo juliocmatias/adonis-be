@@ -10,7 +10,7 @@ export default class extends BaseSchema {
       table.string('name', 30).notNullable()
       table.integer('quantity').notNullable().unsigned()
       table.decimal('price', 10, 2).notNullable().unsigned()
-      table.boolean('deleted').notNullable().defaultTo(false)
+      table.boolean('deleted').nullable().defaultTo(false)
     })
   }
 
