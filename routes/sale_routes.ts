@@ -8,3 +8,4 @@ router
   .only(['index', 'store', 'destroy'])
   .where('id', router.matchers.number())
   .use('*', middleware.tokenValidation())
+  .use('store', middleware.saleValidation())
