@@ -9,8 +9,8 @@ export default class ClientValidationMiddleware {
       return ctx.response.status(400).json({ message: 'Name must be at least 3 characters' })
     }
 
-    if (taxId && taxId.length === 11) {
-      return ctx.response.status(400).json({ message: 'TaxId must be at least 11 characters' })
+    if (taxId && taxId.length !== 11) {
+      return ctx.response.status(400).json({ message: 'TaxId must have 11 characters' })
     }
 
     const output = await next()
