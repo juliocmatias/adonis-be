@@ -1,8 +1,6 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import mapStatusHTTP from '../utils/map_status_http.js'
 import ClientService from '#services/client_service'
-import ClientRequest from '../interfaces/clients/client_request.js'
-import ClientRequestUpdate from '../interfaces/clients/client_req_upadate.js'
 
 export default class ClientController {
   constructor(private clientService = new ClientService()) {}
@@ -13,8 +11,8 @@ export default class ClientController {
   }
 
   async store({ request, response }: HttpContext) {
-    const client = request.all() as ClientRequest
-    const { status, data } = await this.clientService.store(client)
+    const { name, taxId } = request.all()
+    const { status, data } = await this.clientService.store(name, taxId)
     return response.status(mapStatusHTTP(status)).json(data)
   }
 
@@ -22,8 +20,8 @@ export default class ClientController {
 
   async update({ params, request, response }: HttpContext) {
     const { id } = params
-    const client = request.all() as ClientRequestUpdate
-    const { status, data } = await this.clientService.update(id, client)
+    const { name, taxId } = request.all()
+    const { status, data } = await this.clientService.update(id, name, taxId)
     return response.status(mapStatusHTTP(status)).json(data)
   }
 
