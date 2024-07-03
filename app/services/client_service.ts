@@ -15,6 +15,21 @@ export default class ClientService {
     }
   }
 
+  async show(clientId: number): Promise<ServiceResponse<Client>> {
+    try {
+      const client = await this.clientModel.query().where('id', clientId).preload('sales').first()
+
+      if (!client) {
+        return { status: 'NOT_FOUND', data: { message: 'Client not found' } }
+      }
+
+      return { status: 'SUCCESSFUL', data: client }
+    } catch (error) {
+      const message = error instanceof Error ? error.message : 'Unknown error occurred'
+      return { status: 'INTERNAL_SERVER_ERROR', data: { message } }
+    }
+  }
+
   async store(name: string, taxId: string): Promise<ServiceResponse<{ id: number }>> {
     try {
       if (!name || !taxId) {
