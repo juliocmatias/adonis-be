@@ -11,7 +11,16 @@ export default class SalesController {
     return response.status(mapStatusHTTP(status)).json(data)
   }
 
-  async store({ request }: HttpContext) {}
+  async store({ request, response }: HttpContext) {
+    const { clientId, productId, quantity } = request.all()
+    const { status, data } = await this.saleService.store(
+      Number.parseInt(clientId),
+      Number.parseInt(productId),
+      Number.parseInt(quantity)
+    )
+
+    return response.status(mapStatusHTTP(status)).json(data)
+  }
 
   async destroy({ params }: HttpContext) {}
 }
