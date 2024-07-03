@@ -12,6 +12,7 @@ import '../routes/users_routes.js'
 import '../routes/login_routes.js'
 import '../routes/client_routes.js'
 import '../routes/product_routes.js'
+import '../routes/sale_routes.js'
 
 router.get('/', async () => {
   return {
