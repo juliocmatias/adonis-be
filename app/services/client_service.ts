@@ -1,8 +1,12 @@
 import Client from '#models/client'
 import { ServiceResponse } from '../interfaces/service_response.js'
+import Sale from '#models/sale'
 
 export default class ClientService {
-  constructor(private clientModel = Client) {}
+  constructor(
+    private clientModel = Client,
+    private saleModel = Sale
+  ) {}
 
   async index(): Promise<ServiceResponse<Client[]>> {
     try {
@@ -14,13 +18,28 @@ export default class ClientService {
     }
   }
 
-  async show(clientId: number): Promise<ServiceResponse<Client>> {
+  async show(clientId: number, month: string, year: string): Promise<ServiceResponse<Client>> {
     try {
-      const client = await this.clientModel.query().where('id', clientId).preload('sales').first()
+      let client = await this.clientModel.query().where('id', clientId).first()
 
       if (!client) {
         return this.notFound()
       }
+
+      const salesQuery = this.saleModel.query().where('client_id', clientId).orderBy('date', 'desc')
+
+      if (month && year) {
+        const targetMonth = Number.parseInt(month)
+        const targetYear = Number.parseInt(year)
+
+        salesQuery.whereRaw(`MONTH(date) = ? AND YEAR(date) = ?`, [targetMonth, targetYear])
+      }
+
+      const sales = await salesQuery.exec()
+
+      client = client.toJSON() as Client
+
+      client.sales = sales as Client['sales']
 
       return { status: 'SUCCESSFUL', data: client }
     } catch (error) {

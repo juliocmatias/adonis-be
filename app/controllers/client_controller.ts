@@ -16,9 +16,10 @@ export default class ClientController {
     return response.status(mapStatusHTTP(status)).json(data)
   }
 
-  async show({ params, response }: HttpContext) {
+  async show({ params, request, response }: HttpContext) {
+    const { month, year } = request.qs()
     const { clientId } = params
-    const { status, data } = await this.clientService.show(clientId)
+    const { status, data } = await this.clientService.show(clientId, month, year)
     return response.status(mapStatusHTTP(status)).json(data)
   }
 

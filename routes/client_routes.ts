@@ -11,7 +11,7 @@ router
       .use(middleware.tokenValidation())
     router
       .post('/', [ClientController, 'store'])
-      .use([middleware.userValidation(), middleware.clientValidation()])
+      .use([middleware.tokenValidation(), middleware.clientValidation()])
     router
       .put('/:id', [ClientController, 'update'])
       .where('id', router.matchers.number())

@@ -2,6 +2,7 @@ import { ServiceResponse } from '../interfaces/service_response.js'
 import Sale from '#models/sale'
 import Client from '#models/client'
 import Product from '#models/product'
+import { DateTime } from 'luxon'
 
 export default class SaleService {
   constructor(
@@ -28,7 +29,8 @@ export default class SaleService {
   async store(
     clientId: number,
     productId: number,
-    quantity: number
+    quantity: number,
+    date?: string
   ): Promise<ServiceResponse<Sale>> {
     try {
       const client = await this.clientModel.find(clientId)
@@ -50,12 +52,19 @@ export default class SaleService {
 
       const totalPrice = product.price * quantity
 
+      const saleDate = date ? DateTime.fromISO(date) : DateTime.now()
+
+      if (!saleDate.isValid) {
+        return this.badRequest('Invalid date format')
+      }
+
       const sale = await this.saleModel.create({
         clientId,
         productId,
         quantity,
         price: product.price,
         totalPrice,
+        date: saleDate.toISO(),
       })
 
       return { status: 'SUCCESSFUL', data: sale }
