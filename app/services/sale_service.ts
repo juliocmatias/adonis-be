@@ -52,13 +52,19 @@ export default class SaleService {
 
       const totalPrice = product.price * quantity
 
+      const saleDate = date ? DateTime.fromISO(date) : DateTime.now()
+
+      if (!saleDate.isValid) {
+        return this.badRequest('Invalid date format')
+      }
+
       const sale = await this.saleModel.create({
         clientId,
         productId,
         quantity,
         price: product.price,
         totalPrice,
-        date: date ? DateTime.fromISO(date) : DateTime.now(),
+        date: saleDate.toISO(),
       })
 
       return { status: 'SUCCESSFUL', data: sale }
