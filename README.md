@@ -133,6 +133,18 @@
 
 >*If you use VSCode as your IDE, you can use the Thunder Client extension to make requests to the API. In the root of the project, there is a file named `thunder-collection_adonis_be.json` with a collection of pre-configured routes; just import it into the extension to use it.*
 
+<details>
+  <summary><strong>🫂 Entity and Relationship Diagram</strong></summary>
+
+
+  ---
+
+  ### Entity and Relationship Diagram
+
+  ![ERD](./public/img/relationship-diagram.png)
+
+</details>
+
 - The API uses JWT tokens for route authentication, which must be sent via the authentication bearer token.
 
 - The API has the following routes:
