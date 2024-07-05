@@ -437,7 +437,7 @@
 
   - **Method**: GET
   - **Endpoint**: /client
-  - **Description**: List all clients
+  - **Description**: List all clients ordered by id asc
   - **Authentication**: YES
 
   #### Request
@@ -466,6 +466,167 @@
     }
   ]
   ```
+  ---
+
+  - **status**: 401
+  ```json
+  {
+    "message": "Token not provided"
+  }
+  ```
+  ---
+
+  - **status**: 500
+  ```json
+  {
+    "message": "Internal server error"
+  }
+  ```
+  ---
+
+  </details>
+
+  <details>
+    <summary><strong>List all sales of a client by id</strong></summary>
+
+  #### List all sales of a client by id
+
+  - **Method**: GET
+  - **Endpoint**: /client/sales/:id
+  - **Description**: List all sales of a client by id and filter by date by month and year
+  - **Authentication**: YES
+
+  #### Request
+
+  - params:
+    - id: required, number
+
+  - authentication: Bearer Token
+    - token: required
+    - format: Bearer token
+    - Get the token in the login route
+
+  - query params:
+    - month: not required, number, min:1, max:12
+    - year: not required, number, min:1900, max: current year
+  
+  example of request:
+  ```bash
+  http://localhost:3333/client/sales/1?month=1&year=2021
+  ```
+
+  #### Response
+
+  - exemple of response:
+  <details>
+    <summary>200 - Query Params Not Informed</summary>
+
+  - **Status**: 200
+  - **Query Params**: Not Informed
+  ```json
+  {
+    "id": 1,
+    "name": "John Snow",
+    "taxId": "12345678912",
+    "sales": [
+      {
+        "id": 3,
+        "clientId": 1,
+        "productId": 1,
+        "quantity": 10,
+        "price": "10.00",
+        "totalPrice": "100.00",
+        "date": "2021-02-02T00:00:00.000Z"
+      },
+      {
+        "id": 4,
+        "clientId": 1,
+        "productId": 2,
+        "quantity": 10,
+        "price": "20.00",
+        "totalPrice": "200.00",
+        "date": "2021-02-01T00:00:00.000Z"
+      },
+      {
+        "id": 2,
+        "clientId": 1,
+        "productId": 2,
+        "quantity": 10,
+        "price": "20.00",
+        "totalPrice": "200.00",
+        "date": "2021-01-02T00:00:00.000Z"
+      },
+      {
+        "id": 1,
+        "clientId": 1,
+        "productId": 1,
+        "quantity": 10,
+        "price": "10.00",
+        "totalPrice": "100.00",
+        "date": "2021-01-01T00:00:00.000Z"
+      }
+    ]
+  }
+  ```
+
+  </details>
+
+  <details>
+    <summary>200 - Query Params Informed</summary>
+
+  - **Status**: 200
+  - **Query Params**: Informed
+  ```json
+  {
+    "id": 1,
+    "name": "John Snow",
+    "taxId": "12345678912",
+    "sales": [
+      {
+        "id": 2,
+        "clientId": 1,
+        "productId": 2,
+        "quantity": 10,
+        "price": "20.00",
+        "totalPrice": "200.00",
+        "date": "2021-01-02T00:00:00.000Z"
+      },
+      {
+        "id": 1,
+        "clientId": 1,
+        "productId": 1,
+        "quantity": 10,
+        "price": "10.00",
+        "totalPrice": "100.00",
+        "date": "2021-01-01T00:00:00.000Z"
+      }
+    ]
+  }
+  ```
+
+  </details>
+
+  - **status**: 400
+  ```json
+  {
+    "message": "Invalid month or year"
+  }
+  ```
+
+  - **status**: 401
+  ```json
+  {
+    "message": "Token not provided"
+  }
+  ```
+  - **status**: 404
+  ```json
+  {
+    "message": "Client not found"
+  }
+  ```
+
+  </details>
 
 </details>
 
