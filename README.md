@@ -182,7 +182,7 @@
 | Method | Endpoint | Description | Authentication |
 | ----------- | ------------------------ | ----------------- | -------------------- |
 | GET | /client | list all clients | YES |
-| GET | /client/sales/:id | list all sales of a client by id and filter by date by month and year | YES |
+| GET | /client/:clientId/sales | list all sales of a client by id and filter by date by month and year | YES |
 | POST | /client | create a new client | YES |
 | PUT | /client/:id | update a client by id | YES |
 | PATCH | /client/:id | update specific fields of a client by id | YES |
@@ -492,7 +492,7 @@
   #### List all sales of a client by id
 
   - **Method**: GET
-  - **Endpoint**: /client/sales/:id
+  - **Endpoint**: /client/:clientId/sales
   - **Description**: List all sales of a client by id and filter by date by month and year
   - **Authentication**: YES
 
@@ -512,7 +512,7 @@
   
   example of request:
   ```bash
-  http://localhost:3333/client/sales/1?month=1&year=2021
+  http://localhost:3333/client/1/sales?month=1&year=2021
   ```
 
   #### Response

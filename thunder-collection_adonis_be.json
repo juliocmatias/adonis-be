@@ -296,7 +296,7 @@
             "colId": "525e34d1-038e-4a54-92aa-ba2c85491627",
             "containerId": "0141f32b-1d0a-4abd-a077-bfc61248e7e0",
             "name": "getClientSaleClientId",
-            "url": "http://localhost:3333/client/sales/1?month=3&year=2022",
+            "url": "http://localhost:3333/client/1/sales?month=3&year=2022",
             "method": "GET",
             "sortNum": 150000,
             "created": "2024-07-03T21:28:01.062Z",

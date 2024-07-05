@@ -6,7 +6,7 @@ router
   .group(() => {
     router.get('/', [ClientController, 'index']).use(middleware.tokenValidation())
     router
-      .get('/sales/:clientId', [ClientController, 'show'])
+      .get('/:clientId/sales', [ClientController, 'show'])
       .where('clientId', router.matchers.number())
       .use(middleware.tokenValidation())
     router
