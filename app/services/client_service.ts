@@ -1,6 +1,7 @@
 import Client from '#models/client'
 import { ServiceResponse } from '../interfaces/service_response.js'
 import Sale from '#models/sale'
+import { DateTime } from 'luxon'
 
 export default class ClientService {
   constructor(
@@ -31,6 +32,16 @@ export default class ClientService {
       if (month && year) {
         const targetMonth = Number.parseInt(month)
         const targetYear = Number.parseInt(year)
+        if (
+          Number.isNaN(targetMonth) ||
+          Number.isNaN(targetYear) ||
+          targetMonth < 1 ||
+          targetMonth > 12 ||
+          targetYear < 1900 ||
+          targetYear > DateTime.now().year
+        ) {
+          return this.badRequest('Invalid month or year')
+        }
 
         salesQuery.whereRaw(`MONTH(date) = ? AND YEAR(date) = ?`, [targetMonth, targetYear])
       }
@@ -50,7 +61,7 @@ export default class ClientService {
   async store(name: string, taxId: string): Promise<ServiceResponse<{ id: number }>> {
     try {
       if (!name || !taxId) {
-        return { status: 'BAD_REQUEST', data: { message: 'Name and taxId are required' } }
+        return this.badRequest('Name and taxId are required')
       }
 
       const clientExists = await this.clientModel.findBy('taxId', taxId)
@@ -127,5 +138,9 @@ export default class ClientService {
 
   private notFound(): ServiceResponse<any> {
     return { status: 'NOT_FOUND', data: { message: 'Client not found' } }
+  }
+
+  private badRequest(message: string): ServiceResponse<any> {
+    return { status: 'BAD_REQUEST', data: { message } }
   }
 }
