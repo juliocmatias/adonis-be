@@ -132,7 +132,7 @@
 ## 📝 Documentation
 
 >*If you use VSCode as your IDE, you can use the Thunder Client extension to make requests to the API. In the root of the project, there is a file named `thunder-collection_adonis_be.json` with a collection of pre-configured routes; just import it into the extension to use it.*
-
+---
 <details>
   <summary><strong>🫂 Entity and Relationship Diagram</strong></summary>
 
@@ -146,6 +146,8 @@
   - The diagram shows the relationship between the entities in the database, where the user can have many clients, and the client can have many sales. The product can also have many sales, and the sale can have only one client and one product. I used the diagram to guide me in building the migrations, based on the information provided about each entity.
 
 </details>
+
+---
 
 - The API uses JWT tokens for route authentication, which must be sent via the authentication bearer token.
 
@@ -419,6 +421,52 @@
     "message": "Internal server error"
   }
   ```
-  </details>
+</details>
+
+---
+
+<details>
+  <summary><strong>Clients</strong></summary>
+
+  ### Clients
+
+  <details>
+    <summary><strong>List all clients</strong></summary>
+
+  #### List all clients
+
+  - **Method**: GET
+  - **Endpoint**: /client
+  - **Description**: List all clients
+  - **Authentication**: YES
+
+  #### Request
+
+  - authentication: Bearer Token
+    - token: required
+    - format: Bearer token
+    - Get the token in the login route
+
+  #### Response
+
+  - exemple of response:
+
+  - **Status**: 200
+  ```json
+  [
+    {
+      "id": 1,
+      "name": "John Snow",
+      "taxId": "12345678912"
+    },
+    {
+      "id": 2,
+      "name": "Daenerys Targaryen",
+      "taxId": "98765432112"
+    }
+  ]
+  ```
+
+</details>
 
 </details>
