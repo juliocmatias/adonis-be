@@ -39,7 +39,7 @@ services:
       - DB_HOST=mysql
     volumes:
       - ./:/home/node/app
-    command: dumb-init node ace serve --watch
+    command: npm run dev
     healthcheck:
       test: ['CMD', 'curl', '-f', 'http://localhost:${PORT}']
       interval: 1m30s
