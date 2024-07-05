@@ -143,6 +143,8 @@
 
   ![ERD](./public/img/relationship-diagram.png)
 
+  - The diagram shows the relationship between the entities in the database, where the user can have many clients, and the client can have many sales. The product can also have many sales, and the sale can have only one client and one product. I used the diagram to guide me in building the migrations, based on the information provided about each entity.
+
 </details>
 
 - The API uses JWT tokens for route authentication, which must be sent via the authentication bearer token.
