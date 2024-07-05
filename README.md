@@ -165,7 +165,7 @@
 | ----------- | ------------------------ | ----------------- | -------------------- |
 | POST | /user | create a new user | NOT |
 | PUT | /user/:id| update a user by id | YES |
-| PATCH| /blogs/:id| update specific fields of a user by id | YES |
+| PATCH| /user/:id| update specific fields of a user by id | YES |
 
 ---
 
@@ -573,6 +573,10 @@
 
   <details>
     <summary>200 - Query Params Informed</summary>
+
+  >:warning: The response will be the same as the previous one, but with the sales filtered by the month and year informed in the query params.
+  >
+  >:warning: To filter by month and year, it is mandatory to send two queries; sending only one will not make the filter work correctly.
 
   - **Status**: 200
   - **Query Params**: Informed
