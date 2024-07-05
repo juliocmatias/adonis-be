@@ -5,8 +5,10 @@
   "type": "module",
   "license": "UNLICENSED",
   "scripts": {
+    "db:reset": "node ace db:wipe && node ace migration:run && node ace db:seed",
     "start": "node bin/server.js",
     "build": "node ace build",
+    "predev": "npm run db:reset",
     "dev": "node ace serve --watch",
     "test": "node ace test",
     "lint": "eslint .",
