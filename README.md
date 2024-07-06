@@ -939,3 +939,162 @@
 </details>
 
 ---
+
+<details>
+  <summary><strong>Products</strong></summary>
+
+  ### Products
+
+  <details>
+    <summary><strong>List all products</strong></summary>
+
+  #### List all products
+
+  >:warning: Products ordered alphabetically!
+
+  - **Method**: GET
+  - **Endpoint**: /product
+  - **Description**: List all products ordered by id asc
+  - **Authentication**: YES
+
+  #### Request
+
+  - authentication: Bearer Token
+    - token: required
+    - format: Bearer token
+    - Get the token in the login route
+
+  - query params:
+    - all: not required, boolean, example: all=true
+    - deleted: not required, boolean, example: deleted=true
+  
+  >:warning: When passing the query all=true, all products will be shown, whether deleted (soft delete) or not. If you want only the deleted ones, pass the query deleted=true. If you want only the available ones, do not pass any query. If both are passed, all products, deleted or not, will be shown. If a different value than true is passed in the all query, only available products will be shown. If the value of the deleted query is not equal to true, deleted products will not be shown.
+
+  - exemple of request:
+  - **Method**: GET
+  - **URL**:
+  ```bash
+  http://localhost:3333/product?all=true
+  ```
+
+  #### Response
+
+  - exemple of response:
+
+  <details>
+    <summary>200 - Query Params Not Informed - Products no deleted</summary>
+
+  - **Status**: 200
+  - **Query Params**: Not Informed
+  ```json
+  [
+    {
+      "id": 1,
+      "name": "Product 1",
+      "quantity": 100,
+      "price": "10.00",
+      "deleted": 0
+    },
+    {
+      "id": 2,
+      "name": "Product 2",
+      "quantity": 200,
+      "price": "20.00",
+      "deleted": 0
+    }
+  ]
+  ```
+  ---
+
+  </details>
+
+  <details>
+    <summary>200 - Query Params Informed - Products no deleted</summary>
+
+  - **Status**: 200
+  - **Query Params**: something deleted=true
+  ```json
+  [
+    {
+      "id": 3,
+      "name": "Iron Throne",
+      "quantity": 100,
+      "price": "3000.00",
+      "deleted": 1
+    },
+    {
+      "id": 4,
+      "name": "Longclaw",
+      "quantity": 100,
+      "price": "3000.00",
+      "deleted": 1
+    }
+  ]
+  ```
+  ---
+
+  </details>
+
+  <details>
+    <summary>200 - Query Params Informed - All Products</summary>
+
+  - **Status**: 200
+  - **Query Params**: all=true
+  ```json
+  [
+    {
+      "id": 3,
+      "name": "Iron Throne",
+      "quantity": 100,
+      "price": "3000.00",
+      "deleted": 1
+    },
+    {
+      "id": 4,
+      "name": "Longclaw",
+      "quantity": 100,
+      "price": "3000.00",
+      "deleted": 1
+    },
+    {
+      "id": 1,
+      "name": "Product 1",
+      "quantity": 100,
+      "price": "10.00",
+      "deleted": 0
+    },
+    {
+      "id": 2,
+      "name": "Product 2",
+      "quantity": 200,
+      "price": "20.00",
+      "deleted": 0
+    }
+  ]
+  ```
+
+  </details>
+
+  ---
+
+  - **status**: 401
+  ```json
+  {
+    "message": "Token not provided"
+  }
+  ```
+  ---
+
+  - **status**: 500
+  ```json
+  {
+    "message": "Internal server error"
+  }
+  ```
+  ---
+
+  </details>
+
+</details>
+
+---
