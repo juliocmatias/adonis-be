@@ -1408,3 +1408,117 @@
 </details>
 
 ---
+
+<details>
+  <summary><strong>Sales</strong></summary>
+
+  ### Sales
+
+  <details>
+    <summary><strong>List all sales</strong></summary>
+
+  #### List all sales
+
+  >:warning: Sales will be ordered by id asc!
+
+  - **Method**: GET
+  - **Endpoint**: /sale
+  - **Description**: List all sales with client and product
+  - **Authentication**: YES
+
+  #### Request
+
+  - authentication: Bearer Token
+    - token: required
+    - format: Bearer token
+    - Get the token in the login route
+  
+  example of request:
+
+  - **Method**: GET
+  - **URL**:
+  ```bash
+  http://localhost:3333/sale
+  ```
+
+  #### Response
+
+  - exemple of response:
+
+  <details>
+    <summary>200 - Sales</summary>
+
+  - **Status**: 200
+  ```json
+  [
+    {
+      "id": 1,
+      "clientId": 1,
+      "productId": 1,
+      "quantity": 10,
+      "price": "10.00",
+      "totalPrice": "100.00",
+      "date": "2021-01-01T00:00:00.000Z",
+      "client": {
+        "id": 1,
+        "name": "John Snow",
+        "taxId": "12345678912"
+      },
+      "product": {
+        "id": 1,
+        "name": "Product 1",
+        "quantity": 100,
+        "price": "10.00",
+        "deleted": 0
+      }
+    },
+    {
+      "id": 8,
+      "clientId": 2,
+      "productId": 1,
+      "quantity": 20,
+      "price": "10.00",
+      "totalPrice": "200.00",
+      "date": "2021-02-01T00:00:00.000Z",
+      "client": {
+        "id": 2,
+        "name": "Daenerys Targaryen",
+        "taxId": "98765432112"
+      },
+      "product": {
+        "id": 1,
+        "name": "Product 1",
+        "quantity": 100,
+        "price": "10.00",
+        "deleted": 0
+      }
+    }
+  ]
+  ```
+  </details>
+
+  ---
+
+  - **status**: 401
+  ```json
+  {
+    "message": "Token not provided"
+  }
+  ```
+
+  ---
+
+  - **status**: 500
+  ```json
+  {
+    "message": "Internal server error"
+  }
+  ```
+
+  ---
+  
+  </details>
+
+</details>
+
+---
