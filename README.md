@@ -475,6 +475,8 @@
 
   #### List all clients
 
+  >:warning: Clients will be ordered by id!
+
   - **Method**: GET
   - **Endpoint**: /client
   - **Description**: List all clients ordered by id asc
