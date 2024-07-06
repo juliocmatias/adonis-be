@@ -7,6 +7,7 @@ export default class extends BaseSeeder {
       {
         street: 'Winterfell Street',
         number: '1',
+        neighborhood: 'Winterfell',
         city: 'Winterfell',
         state: 'The North',
         country: 'Westeros',
@@ -16,6 +17,7 @@ export default class extends BaseSeeder {
       {
         street: 'Dragonstone Street',
         number: '2',
+        neighborhood: 'Dragonstone',
         city: 'Dragonstone',
         state: 'Crownlands',
         country: 'Westeros',
