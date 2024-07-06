@@ -91,7 +91,9 @@
 
   ![STARTED_API](./public/img/started_api.png)
 
-- After the application is operational, migrations and seeders are deleted. And the API will be operational to receive requests.
+- Once the application is operational, migrations and seeders will be processed. And the API will be operational to receive requests.
+
+  >:warning: Due to the mysql-dev-init.sql file located in the dockerConfig folder, docker-compose is configured to execute the queries from this file, creating a user and a database. If you wish to change the user in the environment variable and the database name, this file must also be edited, and the containers must be taken down and restarted, being rebuilt.
 
 - If you need to reset the API database, run the command:
 
@@ -862,6 +864,76 @@
     "message": "Internal server error"
   }
   ```
+</details>
+
+<details>
+  <summary><strong>Delete a client by id<strong></summary>
+
+  #### Delete a client by id
+
+  >:warning: When a client is deleted, all sales associated with this client will also be deleted due to the foreign key settings in the sales migration.
+
+  - **Method**: DELETE
+  - **Endpoint**: /client/:id
+  - **Description**: Delete a client by id and automatically delete all sales of this client
+  - **Authentication**: YES
+
+  #### Request
+
+  - params:
+    - id: required, number
+
+  - authentication: Bearer Token
+    - token: required
+    - format: Bearer token
+    - Get the token in the login route
+  
+  example of request:
+
+  - **Method**: DELETE
+  - **URL**:
+  ```bash
+  http://localhost:3333/client/1
+  ```
+
+  #### Response
+
+  - exemple of response:
+
+  - **Status**: 200
+  ```json
+  {
+    "message": "Client deleted"
+  }
+  ```
+
+  ---
+
+  - **status**: 401
+  ```json
+  {
+    "message": "Token not provided"
+  }
+  ```
+
+  ---
+
+  - **status**: 404
+  ```json
+  {
+    "message": "Client not found"
+  }
+  ```
+
+  ---
+
+  - **status**: 500
+  ```json
+  {
+    "message": "Internal server error"
+  }
+  ```
+
 </details>
 
 </details>
