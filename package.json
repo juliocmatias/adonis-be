@@ -61,6 +61,7 @@
     "@adonisjs/cors": "^2.2.1",
     "@adonisjs/lucid": "^21.1.0",
     "@vinejs/vine": "^2.1.0",
+    "adonis-autoswagger": "^3.54.0",
     "bcryptjs": "^2.4.3",
     "jsonwebtoken": "^9.0.2",
     "luxon": "^3.4.4",
