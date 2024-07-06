@@ -362,6 +362,15 @@
 
   ---
 
+  - **status**: 401
+  ```json
+  {
+    "message": "Token not provided"
+  }
+  ```
+
+  ---
+
   - **status**: 409
   ```json
   {
@@ -703,6 +712,7 @@
   - authentication: Bearer Token
     - token: required
     - format: Bearer token
+    - Get the token in the login route
   
   - validation:
     - name: required, min:3
