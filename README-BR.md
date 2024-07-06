@@ -625,6 +625,8 @@ O projeto foi desenvolvido utilizando as seguintes tecnologias:
   }
   ```
 
+  ---
+
   </details>
 
   <details>
@@ -664,6 +666,10 @@ O projeto foi desenvolvido utilizando as seguintes tecnologias:
   }
   ```
 
+  </details>
+
+  ---
+
   - **status**: 400
   ```json
   {
@@ -671,26 +677,31 @@ O projeto foi desenvolvido utilizando as seguintes tecnologias:
   }
   ```
 
+  ---
+
   - **status**: 401
   ```json
   {
     "message": "Token not provided"
   }
   ```
+
+  ---
+
   - **status**: 404
   ```json
   {
     "message": "Client not found"
   }
   ```
+  ---
+
   - **status**: 500
   ```json
   {
     "message": "Internal server error"
   }
   ```
-
-  </details>
 
 </details>
 
@@ -1420,7 +1431,7 @@ O projeto foi desenvolvido utilizando as seguintes tecnologias:
 
   #### Lista todas as vendas
 
-  >:warning: Sales will be ordered by id asc!
+  >:warning: As vendas serão ordenadas por id asc!
 
   - **Método**: GET
   - **Endpoint**: /sale
