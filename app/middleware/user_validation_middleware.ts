@@ -8,7 +8,7 @@ export default class UsersMiddleware {
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
 
     if (email && !emailPattern.test(email)) {
-      return ctx.response.status(400).json({ message: 'Invalid email' })
+      return ctx.response.status(400).json({ message: 'Invalid format for email' })
     }
 
     if (password && password.length < 6) {
