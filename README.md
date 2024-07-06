@@ -1,6 +1,8 @@
 
 # 🌎 Welcome to the Adonis-be repository
 
+### [Translations](./README-BR.md) 🇧🇷
+
 #### 📄 About the project 
 
 - *This back-end technical testing project involves the development of a RESTful API. It enables external users to sign up and, upon logging in, allows for the registration of clients and products, as well as the recording of product sales to clients. The project utilizes the AdonisJs framework to structure the API with a layered architecture (MVC), omitting views. Lucid is employed as an ORM, with Bcrypt for password encryption and JWT for token authentication, adhering to the principles of RESTful APIs and the MVC pattern.*
@@ -25,7 +27,7 @@
 
     Debian/Ubuntu bash:
     ```bash
-    apt-get install git
+    sudo apt-get install git
     ```
 
     other kernel follow the instructions on the website [Git](https://git-scm.com/download/linux).
