@@ -247,6 +247,13 @@
     - email: required, unique, format email valid
     - password: required, min:6
 
+  - exemple of request:
+  - **Method**: POST
+  - **URL**:
+  ```bash
+  http://localhost:3333/user
+  ```
+
   #### Response
 
   - exemple of response:
@@ -264,7 +271,7 @@
   - **status**: 400
   ```json
   {
-    "message": "Invalid email"
+    "message": "Invalid format for email"
   }
   ```
   ---
@@ -316,6 +323,13 @@
     - email: required, unique, format email valid
     - password: required, min:6
 
+  - exemple of request:
+  - **Method**: PUT
+  - **URL**:
+  ```bash
+  http://localhost:3333/user/1
+  ```
+
   #### Response
 
   - exemple of response:
@@ -333,7 +347,7 @@
   - **status**: 400
   ```json
   {
-    "message": "Invalid email"
+    "message": "Invalid format for email"
   }
   ```
 
@@ -385,6 +399,13 @@
     - email: required, format email valid
     - password: required, min:6
 
+  - exemple of request:
+  - **Method**: POST
+  - **URL**:
+  ```bash
+  http://localhost:3333/login
+  ```
+
   #### Response
 
   - exemple of response:
@@ -400,7 +421,7 @@
   - **status**: 400
   ```json
   {
-    "message": "Invalid email"
+    "message": "Invalid format for email"
   }
   ```
 
@@ -446,6 +467,13 @@
     - token: required
     - format: Bearer token
     - Get the token in the login route
+
+  - exemple of request:
+  - **Method**: GET
+  - **URL**:
+  ```bash
+  http://localhost:3333/client
+  ```
 
   #### Response
 
@@ -511,11 +539,15 @@
     - year: not required, number, min:1900, max: current year
   
   example of request:
+  - **Method**: GET
+  - **URL**:
   ```bash
   http://localhost:3333/client/1/sales?month=1&year=2021
   ```
 
   #### Response
+
+  >:warning: Sales will be ordered by date, always showing the most recent one first!
 
   - exemple of response:
   <details>
@@ -627,6 +659,12 @@
   ```json
   {
     "message": "Client not found"
+  }
+  ```
+  - **status**: 500
+  ```json
+  {
+    "message": "Internal server error"
   }
   ```
 
