@@ -153,6 +153,8 @@
 
 - The API has the following routes:
 
+>:warning: For the address and phone entities, routes, controllers, and services were not created as I focused on the main requirements of the challenge to deliver it on time. However, the migration with relationships and the models were implemented.
+
 <details>
   <summary><strong>📖 Routers</strong></summary>
 
@@ -679,5 +681,7 @@
   </details>
 
 </details>
+
+---
 
 </details>
