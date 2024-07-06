@@ -1166,6 +1166,86 @@
   ```
 
   ---
+
+  </details>
+
+  <details>
+    <summary><strong>Create a new product</strong></summary>
+
+  #### Create a new product
+
+  - **Method**: POST
+  - **Endpoint**: /product
+  - **Description**: Create a new product
+  - **Authentication**: YES
+
+  #### Request
+
+  - body example:
+  ```json
+  {
+    "name": "Product 1",
+    "quantity": 100,
+    "price": "10.00"
+  }
+  ```
+
+  - authentication: Bearer Token
+    - token: required
+    - format: Bearer token
+    - Get the token in the login route
+  
+  - validation:
+    - name: required, min:3
+    - quantity: required, number
+    - price: required, number
+
+  example of request:
+  - **Method**: POST
+  - **URL**:
+  ```bash
+  http://localhost:3333/product
+  ```
+
+  #### Response
+
+  - exemple of response:
+
+  - **Status**: 201
+  ```json
+  {
+    "id": 1
+  }
+  ```
+
+  ---
+
+  - **status**: 400
+  ```json
+  {
+    "message": "Missing required fields"
+  }
+  ```
+
+  ---
+
+  - **status**: 401
+  ```json
+  {
+    "message": "Token not provided"
+  }
+  ```
+
+  ---
+
+  - **status**: 500
+  ```json
+  {
+    "message": "Internal server error"
+  }
+  ```
+
+  ---
   
   </details>
 
