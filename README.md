@@ -1095,6 +1095,80 @@
 
   </details>
 
+  <details>
+    <summary><strong>Get product by id</strong></summary>
+
+  #### Get product by id
+
+  - **Method**: GET
+  - **Endpoint**: /product/:id
+  - **Description**: Get product by id
+  - **Authentication**: YES
+
+  #### Request
+
+  - params:
+    - id: required, number
+
+  - authentication: Bearer Token
+    - token: required
+    - format: Bearer token
+    - Get the token in the login route
+
+  example of request:
+
+  - **Method**: GET
+  - **URL**:
+  ```bash
+  http://localhost:3333/product/1
+  ```
+
+  #### Response
+
+  - exemple of response:
+
+  - **Status**: 200
+  ```json
+  {
+    "id": 1,
+    "name": "Product 1",
+    "quantity": 100,
+    "price": "10.00",
+    "deleted": 0
+  }
+  ```
+
+  ---
+
+  - **status**: 401
+  ```json
+  {
+    "message": "Token not provided"
+  }
+  ```
+
+  ---
+
+  - **status**: 404
+  ```json
+  {
+    "message": "Product not found"
+  }
+  ```
+
+  ---
+
+  - **status**: 500
+  ```json
+  {
+    "message": "Internal server error"
+  }
+  ```
+
+  ---
+  
+  </details>
+
 </details>
 
 ---
