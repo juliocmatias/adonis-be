@@ -650,8 +650,6 @@
   }
   ```
 
-  </details>
-
   - **status**: 400
   ```json
   {
@@ -682,6 +680,81 @@
 
 </details>
 
----
+<details>
+  <summary><strong>create a new client<strong></summary>
+
+  #### Create a new client
+
+  - **Method**: POST
+  - **Endpoint**: /client
+  - **Description**: Create a new client
+  - **Authentication**: YES
+
+  #### Request
+
+  - body example:
+  ```json
+  {
+    "name": "John Snow",
+    "taxId": "12345678912"
+  }
+  ```
+
+  - authentication: Bearer Token
+    - token: required
+    - format: Bearer token
+  
+  - validation:
+    - name: required, min:3
+    - taxId: required, unique, exact:11
+  
+  example of request:
+  - **Method**: POST
+  - **URL**:
+  ```bash
+  http://localhost:3333/client
+  ```
+
+  #### Response
+
+  - exemple of response:
+
+  - **Status**: 201
+  ```json
+  {
+    "id": 1
+  }
+  ```
+
+  ---
+
+  - **status**: 400
+  ```json
+  {
+    "message": "Name and taxId are required"
+  }
+  ```
+
+  ---
+
+  - **status**: 409
+  ```json
+  {
+    "message": "Client already exists"
+  }
+  ```
+
+  ---
+
+  - **status**: 500
+  ```json
+  {
+    "message": "Internal server error"
+  }
+  ```
 
 </details>
+
+</details>
+
+---
