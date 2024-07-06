@@ -1335,6 +1335,76 @@
 
   </details>
 
+  <details>
+    <summary><strong>Delete a product by id</strong></summary>
+
+  #### Delete a product by id
+
+  >:warning: Soft delete has been implemented so that when a product is deleted, it is not actually removed from the database. Its record is retained, with the deleted column set to 1 when deleted, and to 0 (the default) when available.
+
+  - **Method**: DELETE
+  - **Endpoint**: /product/:id
+  - **Description**: Delete a product by id (soft delete)
+  - **Authentication**: YES
+
+  #### Request
+
+  - params:
+    - id: required, number
+
+  - authentication: Bearer Token
+    - token: required
+    - format: Bearer token
+    - Get the token in the login route
+
+  example of request:
+
+  - **Method**: DELETE
+  - **URL**:
+  ```bash
+  http://localhost:3333/product/1
+  ```
+
+  #### Response
+
+  - exemple of response:
+
+  - **Status**: 200
+  ```json
+  {
+    "message": "Product deleted"
+  }
+  ```
+
+  ---
+
+  - **status**: 401
+  ```json
+  {
+    "message": "Token not provided"
+  }
+  ```
+
+  ---
+
+  - **status**: 404
+  ```json
+  {
+    "message": "Product not found"
+  }
+  ```
+
+  ---
+
+  - **status**: 500
+  ```json
+  {
+    "message": "Internal server error"
+  }
+  ```
+
+  </details>
+
 </details>
 
 ---
