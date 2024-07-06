@@ -36,7 +36,9 @@ export default class SaleService {
       const client = await this.clientModel.find(clientId)
       const product = await this.productModel.find(productId)
 
-      if (!client || !product) return this.badRequest('Client and product not found')
+      if (!client || !product) {
+        return { status: 'NOT_FOUND', data: { message: 'Client or product not found' } }
+      }
 
       if (product.quantity < quantity) return this.badRequest('Product quantity is not enough')
 
