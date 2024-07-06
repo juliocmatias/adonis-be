@@ -478,7 +478,7 @@ O projeto foi desenvolvido utilizando as seguintes tecnologias:
 
   #### Listar todos os clientes
 
-  >:warning: Clients will be ordered by id!
+  >:warning: Os clientes serão ordenados por id!
 
   - **Método**: GET
   - **Endpoint**: /client
