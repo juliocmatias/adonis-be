@@ -36,9 +36,7 @@ export default class SaleService {
       const client = await this.clientModel.find(clientId)
       const product = await this.productModel.find(productId)
 
-      if (!client || !product) {
-        return { status: 'NOT_FOUND', data: { message: 'Client or product not found' } }
-      }
+      if (!client || !product) return this.notFound('Client or product not found')
 
       if (product.quantity < quantity) return this.badRequest('Product quantity is not enough')
 
@@ -79,9 +77,7 @@ export default class SaleService {
     try {
       const sale = await this.saleModel.find(id)
 
-      if (!sale) {
-        return { status: 'NOT_FOUND', data: { message: 'Sale not found' } }
-      }
+      if (!sale) return this.notFound('Sale not found')
 
       const product = await this.productModel.find(sale.productId)
       if (product) {
@@ -109,5 +105,9 @@ export default class SaleService {
 
   private badRequest(message: string): ServiceResponse<any> {
     return { status: 'BAD_REQUEST', data: { message } }
+  }
+
+  private notFound(message: string): ServiceResponse<any> {
+    return { status: 'NOT_FOUND', data: { message } }
   }
 }
