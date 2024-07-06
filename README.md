@@ -1246,7 +1246,93 @@
   ```
 
   ---
-  
+
+  </details>
+
+  <details>
+    <summary><strong>Update a product by id</strong></summary>
+
+  #### Update a product by id
+
+  >:warning: Since Adonis uses the same method in the controller for both PUT and PATCH, which is update, this route will accept both the PUT method to update all properties and the PATCH method to update only one.
+
+  - **Method**: PUT
+  - **Endpoint**: /product/:id
+  - **Description**: Update a product by id
+  - **Authentication**: YES
+
+  #### Request
+
+  - body example:
+  ```json
+  {
+    "name": "Product 1",
+    "quantity": 100,
+    "price": "10.00"
+  }
+  ```
+
+  - params:
+    - id: required, number
+
+  - authentication: Bearer Token
+    - token: required
+    - format: Bearer token
+    - Get the token in the login route
+
+  - validation:
+    - name: not required, min:3
+    - quantity: not required, number
+    - price: not required, number
+
+  example of request:
+
+  - **Method**: PUT
+  - **URL**:
+  ```bash
+  http://localhost:3333/product/1
+  ```
+
+  #### Response
+
+  - exemple of response:
+
+  - **Status**: 200
+  ```json
+  {
+    "message": "Product updated"
+  }
+  ```
+
+  ---
+
+  - **status**: 401
+  ```json
+  {
+    "message": "Token not provided"
+  }
+  ```
+
+  ---
+
+  - **status**: 404
+  ```json
+  {
+    "message": "Product not found"
+  }
+  ```
+
+  ---
+
+  - **status**: 500
+  ```json
+  {
+    "message": "Internal server error"
+  }
+  ```
+
+  ---
+
   </details>
 
 </details>
