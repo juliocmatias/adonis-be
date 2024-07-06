@@ -237,6 +237,7 @@
 
   #### Request
 
+  - body:
   ```json
   {
     "email": "johndoe@doe.com",
@@ -301,6 +302,8 @@
 
   #### Update a user by id
 
+  >:warning: Since Adonis uses the same method in the controller for both PUT and PATCH, which is update, this route will accept both the PUT method to update all properties and the PATCH method to update only one.
+
   - **Method**: PUT
   - **Endpoint**: /user/:id
   - **Description**: Update a user by id
@@ -308,20 +311,24 @@
 
   #### Request
 
+  - body:
   ```json
   {
     "email": "exemple@exemple.com",
     "password": "123456"
   }
   ```
+  - params:
+    - id: required, number
+
   - authentication: Bearer Token
     - token: required
     - format: Bearer token
     - Get the token in the login route
 
   - validation:
-    - email: required, unique, format email valid
-    - password: required, min:6
+    - email: required if not provided password, unique, format email valid
+    - password: required if not provided email, min:6
 
   - exemple of request:
   - **Method**: PUT
@@ -389,6 +396,7 @@
 
   #### Request
 
+  - body:
   ```json
   {
     "email": "user@user.com",
