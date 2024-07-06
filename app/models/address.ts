@@ -13,6 +13,9 @@ export default class Address extends BaseModel {
   declare number: string
 
   @column()
+  declare neighborhood: string
+
+  @column()
   declare city: string
 
   @column()
