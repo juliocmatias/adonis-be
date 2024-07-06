@@ -1519,6 +1519,110 @@
   
   </details>
 
+  <details>
+    <summary><strong>Create a new sale</strong></summary>
+
+  #### Create a new sale
+
+  - **Method**: POST
+  - **Endpoint**: /sale
+  - **Description**: Create a new sale
+  - **Authentication**: YES
+
+  #### Request
+
+  - body example:
+  ```json
+  {
+    "clientId": 1,
+    "productId": 1,
+    "quantity": 10,
+    "date": "2024-03-01"
+  }
+  ```
+
+  - authentication: Bearer Token
+    - token: required
+    - format: Bearer token
+    - Get the token in the login route
+
+  - validation:
+    - clientId: required, number
+    - productId: required, number
+    - quantity: required, number
+    - date: not required, date valid
+
+  >:warning: The date field is not mandatory, and if not provided, the current date will be used. If provided, it must be in dateTime format (2024-03-01T00:00:00) or a valid date format (2024-03-01).
+  >
+  >:warning: When creating a sale, it will be checked if the product is available (not deleted) and if there is sufficient quantity to complete the sale. If so, the quantity will be decremented in the database.
+  >
+  >:warning: The price will be obtained directly from the Product model, without the need to pass it as a parameter. Thus, the total price will also be calculated automatically, making it unnecessary to pass it as a parameter..
+
+  example of request:
+
+  - **Method**: POST
+  - **URL**:
+  ```bash
+  http://localhost:3333/sale
+  ```
+
+  #### Response
+
+  - exemple of response:
+
+  - **Status**: 201
+  ```json
+  {
+    "clientId": 1,
+    "productId": 1,
+    "quantity": 2,
+    "price": "10.00",
+    "totalPrice": 20,
+    "date": "2024-03-01T00:00:00.000+00:00",
+    "id": 10
+  }
+  ```
+
+  ---
+
+  - **status**: 400
+  ```json
+  {
+    "message": "Client, product, and quantity are required"
+  }
+  ```
+
+  ---
+
+  - **status**: 401
+  ```json
+  {
+    "message": "Token not provided"
+  }
+  ```
+
+  ---
+
+  - **status**: 404
+  ```json
+  {
+    "message": "Client or product not found"
+  }
+  ```
+
+  ---
+
+  - **status**: 500
+  ```json
+  {
+    "message": "Internal server error"
+  }
+  ```
+
+  ---
+
+  </details>
+
 </details>
 
 ---
