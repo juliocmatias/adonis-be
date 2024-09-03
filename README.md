@@ -20,7 +20,7 @@
 
 -  Copy the repository to a local folder using the terminal with the following command:
     ```bash
-    git clone git@github.com:juliomatiastrybe/adonis-be.git
+    git clone git@github.com:juliocmatias/adonis-be.git
     ```
 
     If git is not installed, it can be installed using this command in the Debian/Ubuntu bash:
