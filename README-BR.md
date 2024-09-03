@@ -21,7 +21,7 @@ O projeto foi desenvolvido utilizando as seguintes tecnologias:
 
 - Copie o repositório para uma pasta local usando o terminal com o seguinte comando:
     ```bash
-    git clone git@github.com:juliomatiastrybe/adonis-be.git
+    git clone git@github.com:juliocmatias/adonis-be.git
     ```
     Se o Git não estiver instalado, ele pode ser instalado usando este comando no bash do Debian/Ubuntu:
 
